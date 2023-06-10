@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>코인 포스트</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='coinpost.css') }}">
+
+</head>
+<body>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <script>
+      alert("{{messages[0]}}")
+    </script>
+  {% endif %}
+  {% endwith %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2 post-container">
+        <h2 class="text-center">코인 포스트</h2>
+        <form action="/coinpost" method="POST">
+          <div class="form-group">
+            <label for="coin_amount">코인 개수</label>
+            <input type="text" class="form-control" name="coin_amount" placeholder="코인 개수" required>
+          </div>
+          <div class="form-group">
+            <label for="coin_price">코인 가격</label>
+            <input type="text" class="form-control" name="coin_price" placeholder="코인 가격" required>
+          </div>
+          <button type="submit" class="btn btn-primary">등록</button>
+        </form>
+        <hr>
+        {% if posts %}
+        <h4>게시물 목록</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>작성 시간</th>
+              <th>작성자</th>
+              <th>코인 개수</th>
+              <th>코인 가격</th>
+              <th>구매</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for post in posts %}
+            <tr>
+              <td>{{ post.timestamp }}</td>
+              <td>{{ post.userid }}</td>
+              <td>{{ post.coin_amount }}</td>
+              <td>{{ post.coin_price }}</td>
+              <td>
+                <form action="/buy/{{ post._id }}" method="POST">
+                  <input type="submit" class="btn btn-success" value="구매">
+                </form>
+            </td>
+            <td> <!-- 추가: 삭제 버튼 -->
+              {% if session['userid'] == post.userid %} <!-- 현재 사용자와 포스트 작성자가 동일한 경우에만 삭제 버튼 표시 -->
+              <form action="/delete_post/{{ post._id }}" method="POST">
+                <input type="submit" class="btn btn-danger" value="삭제">
+              </form>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>등록된 게시물이 없습니다.</p>
+      {% endif %}
+      
+        <hr>
+        <a href="/" class="btn btn-secondary">메인 페이지로 돌아가기</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

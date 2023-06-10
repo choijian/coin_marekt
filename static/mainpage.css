@@ -1,0 +1,59 @@
+/* Bootstrap override */
+body {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  .container {
+    margin-top: 50px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .card-text {
+    margin-bottom: 5px;
+  }
+  
+  /* Custom styles */
+  .card-body {
+    padding: 20px;
+  }
+  
+  .text-center {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .card-subtitle {
+    font-weight: bold;
+  }
+  
+  .card-text {
+    color: #2f4f4f;
+    font-weight: bold;
+  }
+  
+  .card-body .btn {
+    margin-top: 10px;
+    background-color: darkblue;
+    border-color: transparent;
+  }
+  
+  .card-body .btn:hover {
+    background-color: darkblue;
+    border-color: transparent;
+  }
+
+  .navbar {
+    background-color: darkblue !important;
+  }

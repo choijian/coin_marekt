@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>마이페이지</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='mypage.css') }}">
+
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <script>
+        alert("{{messages[0]}}")
+      </script>
+    {% endif %}
+    {% endwith %}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 mypage-container">
+        <h2 class="text-center">마이페이지</h2>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">이름: {{ username }}</h5>
+            <p class="card-text">남은 코인 개수: {{ coin_amount }}</p>
+            <p class="card-text">잔액: {{ balance }}</p>
+          </div>
+        </div>
+        <hr>
+        {% if website %}
+<div class="mt-4">
+  <h5>Website 코인 개수: {{ coin_amount }}</h5>
+  <form action="/mypage" method="POST">
+    <div class="form-group">
+      <label for="coin_amount">추가할 코인 개수</label>
+      <input type="text" class="form-control" name="coin_amount" placeholder="추가할 코인 개수" required>
+    </div>
+    <button type="submit" class="btn btn-primary">코인 추가</button>
+  </form>
+</div>
+{% endif %}
+        <h4>금액 입출금</h4>
+        <form action="mypage" method="POST">
+          <div class="form-group">
+            <label for="deposit_amount">입금 금액</label>
+            <input type="text" class="form-control" name="deposit_amount" placeholder="입금할 금액">
+          </div>
+          <button type="submit" class="btn btn-primary">입금</button>
+        </form>
+        <br>
+        <form action="mypage" method="POST">
+          <div class="form-group">
+            <label for="withdraw_amount">출금 금액</label>
+            <input type="text" class="form-control" name="withdraw_amount" placeholder="출금할 금액">
+          </div>
+          <button type="submit" class="btn btn-primary">출금</button>
+        </form>
+        <hr>
+        <a href="/" class="btn btn-secondary">메인 페이지로 돌아가기</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
